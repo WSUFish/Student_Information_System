@@ -1,0 +1,19 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="SIS:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/SIS_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="SIS/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="SIS" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="file-copy" path="F:/jstl_jar/jakarta-taglibs-standard-1.1.2/lib/jstl.jar" />
+          <element id="file-copy" path="F:/jstl_jar/jakarta-taglibs-standard-1.1.2/lib/standard.jar" />
+          <element id="file-copy" path="F:/mysql-connector-java-8.0.15/mysql-connector-java-8.0.15.jar" />
+          <element id="file-copy" path="F:/数据库连接池/c3p0-0.9.5.2/lib/c3p0-0.9.5.2.jar" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
