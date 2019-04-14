@@ -6,9 +6,31 @@ public class Student {
     private String email;
     private String name;
     private String address;
-    private int age;
+    private int id;
     private String phone;
 
+
+    public Student() {
+    }
+
+    public Student(String num, String sex, String email, String name, String address, String phone) {
+        this.num = num;
+        this.sex = sex;
+        this.email = email;
+        this.name = name;
+        this.address = address;
+        this.phone = phone;
+    }
+
+    public Student(String num, String sex, String email, String name, String address, int id, String phone) {
+        this.num = num;
+        this.sex = sex;
+        this.email = email;
+        this.name = name;
+        this.address = address;
+        this.id = id;
+        this.phone = phone;
+    }
 
     public void setNum(String num) {
         this.num = num;
@@ -30,8 +52,8 @@ public class Student {
         this.address = address;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setPhone(String phone) {
@@ -58,8 +80,8 @@ public class Student {
         return address;
     }
 
-    public int getAge() {
-        return age;
+    public int getId() {
+        return id;
     }
 
     public String getPhone() {

@@ -1,21 +1,13 @@
-package com.zjk.Dao;
+package com.zjk.Service.ServiceImp;
 
 import com.zjk.entity.Student;
 
 import java.util.List;
 
-public interface StudentDao {
-
+public interface StudentService {
     List<Student> findAll();
     boolean insert(Student student);
     boolean delete(int id);
-
-    /**
-     * 根据id查询
-     * @param id
-     * @return
-     */
     Student findByID(int id);
-
     boolean update(Student student);
 }

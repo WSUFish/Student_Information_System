@@ -1,6 +1,7 @@
 package com.zjk.Jdbc_test;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
+import com.zjk.Jdbc_test.resultSetHandler.ResultSetHandler;
 
 import java.beans.PropertyVetoException;
 import java.sql.*;
@@ -9,38 +10,63 @@ public class JDBCUtil {
     public static String url = "jdbc:mysql://localhost:3306/StudentIS?serverTimezone=UTC";
     public static String name = "root";
     public static String password = "root";
-    private static ComboPooledDataSource dataSource=new ComboPooledDataSource();
+    private static ComboPooledDataSource dataSource = new ComboPooledDataSource();
 
-    static{
+    static {
         dataSource.setUser(name);
         dataSource.setJdbcUrl(url);
         dataSource.setPassword(password);
     }
+
     public static void main(String[] args) {
         String sql = "insert into student values(null,?,?,?,?,?,?,?)";
-        update(sql,"0604011","冒学","男",21,"日下","0604010@uestc.com",null);
+        update(sql, "0604011", "冒学", "男", 21, "日下", "0604010@uestc.com", null);
 
     }
 
-    public static void update(String sql,Object ...args){
-        Connection c=null;
+    public static void update(String sql, Object... args) {
+        Connection c = null;
         PreparedStatement ps = null;
         try {
-            c=JDBCUtil.getConn();
-            ps=c.prepareStatement(sql);
-            if(args.length!=ps.getParameterMetaData().getParameterCount()){
+            c = JDBCUtil.getConn();
+            ps = c.prepareStatement(sql);
+            if (args.length != ps.getParameterMetaData().getParameterCount()) {
                 System.out.println("参数数量不匹配，请重试");
                 return;
             }
-            for(int i=0;i<args.length;i++){
-                ps.setObject(i+1,args[i]);
+            for (int i = 0; i < args.length; i++) {
+                ps.setObject(i + 1, args[i]);
             }
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            release(c,ps);
+            release(c, ps);
         }
+    }
+
+    public static <T> T query(String sql, ResultSetHandler<T> rsh, Object... args) {
+        Connection c = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            c = JDBCUtil.getConn();
+            ps = c.prepareStatement(sql);
+            if (args.length != ps.getParameterMetaData().getParameterCount()) {
+                System.out.println("参数数量不匹配，请重试");
+                return null;
+            }
+            for (int i = 0; i < args.length; i++) {
+                ps.setObject(i + 1, args[i]);
+            }
+            rs = ps.executeQuery();
+            return rsh.handle(rs);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            release(c, ps,rs);
+        }
+        return null;
     }
 
     public static void register() {

@@ -4,6 +4,8 @@ import com.zjk.Dao.StudentDao;
 import com.zjk.Dao.UserDao;
 import com.zjk.Dao.impl.StudentDaoImpl;
 import com.zjk.Dao.impl.UserDaoImpl;
+import com.zjk.Service.ServiceImp.StudentService;
+import com.zjk.Service.ServiceImp.StudentServiceImp01;
 import com.zjk.entity.Student;
 
 import javax.servlet.ServletException;
@@ -33,14 +35,7 @@ public class LoginServlet extends HttpServlet {
 
         UserDao Dao=new UserDaoImpl();
         if(Dao.login(username,password)){
-
-            //读取学生信息，存入session中
-            StudentDao studentDao=new StudentDaoImpl();
-            List<Student> list=studentDao.findAll();
-            request.getSession().setAttribute("list",list);
-
-            response.sendRedirect("studentList.jsp");
-            //response.getWriter().write("登录成功!!!");
+            request.getRequestDispatcher("list_servlet").forward(request,response);
         }else {
             response.getWriter().write("用户名或密码错误!");
         }

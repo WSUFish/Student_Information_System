@@ -2,47 +2,54 @@ package com.zjk.Dao.impl;
 
 import com.zjk.Dao.StudentDao;
 import com.zjk.Jdbc_test.JDBCUtil;
+import com.zjk.Jdbc_test.resultSetHandler.SingleStudentRSH;
+import com.zjk.Jdbc_test.resultSetHandler.StudentRSH;
 import com.zjk.entity.Student;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class StudentDaoImpl implements StudentDao {
     @Override
     public List<Student> findAll() {
-        Connection c=null;
-        PreparedStatement ps=null;
-        ResultSet rs=null;
-        String sql="select * from student";
-        List<Student> list=new ArrayList<>();
-        try {
-            c= JDBCUtil.getConn();
-            ps=c.prepareStatement(sql);
-            rs=ps.executeQuery();
-
-
-            while (rs.next()){
-                Student stu=new Student();
-
-                stu.setAge(rs.getInt("Sage"));
-                stu.setName(rs.getString("Sname"));
-                stu.setSex(rs.getString("Ssex"));
-                stu.setNum(rs.getString("Snum"));
-                stu.setEmail(rs.getString("Semail"));
-                stu.setPhone(rs.getString("Sphone"));
-                stu.setAddress(rs.getString("Saddress"));
-                System.out.println("phone is "+stu.getPhone()+" email is "+stu.getEmail());
-                list.add(stu);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            JDBCUtil.release(c,ps,rs);
-        }
+        List<Student> list=JDBCUtil.query("select * from student",new StudentRSH());
         return list;
+    }
+
+    @Override
+    public boolean insert(Student student) {
+        JDBCUtil.update("insert into student values(null,?,?,?,?,?,?)",
+                student.getNum(),
+                student.getName(),
+                student.getSex(),
+                student.getAddress(),
+                student.getEmail(),
+                student.getPhone()
+        );
+        return true;
+    }
+
+    @Override
+    public boolean delete(int Sid) {
+        JDBCUtil.update("delete from student where Sid=?",Sid);
+        return false;
+    }
+
+    @Override
+    public Student findByID(int id) {
+        return JDBCUtil.query("select * from student where Sid=?",new SingleStudentRSH(),id);
+    }
+
+    @Override
+    public boolean update(Student student) {
+        JDBCUtil.update("update student set Snum=?, Sname=?, Ssex=?, Saddress=?, Semail=?, Sphone=? where Sid=?",
+                student.getNum(),
+                student.getName(),
+                student.getSex(),
+                student.getAddress(),
+                student.getEmail(),
+                student.getPhone(),
+                student.getId()
+        );
+        return false;
     }
 }
