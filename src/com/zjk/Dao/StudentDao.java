@@ -18,4 +18,6 @@ public interface StudentDao {
     Student findByID(int id);
 
     boolean update(Student student);
+
+    List<Student> search(String num,String name);
 }

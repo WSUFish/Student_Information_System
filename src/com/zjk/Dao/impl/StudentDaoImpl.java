@@ -52,4 +52,26 @@ public class StudentDaoImpl implements StudentDao {
         );
         return false;
     }
+
+    @Override
+    public List<Student> search(String num, String name) {
+        String sql="select * from student";
+        List<Student> list=null;
+        if(notEmpty(num)&& notEmpty(name)){
+            sql+=" where Snum=? and Sname=?";
+            list=JDBCUtil.query(sql,new StudentRSH(),num,name);
+        }else if(notEmpty(num)){
+            sql+=" where Snum=?";
+            list=JDBCUtil.query(sql,new StudentRSH(),num);
+        }else if(notEmpty(name)){
+            sql+=" where Sname=?";
+            list=JDBCUtil.query(sql,new StudentRSH(),name);
+        }else{
+            list=JDBCUtil.query(sql,new StudentRSH());
+        }
+        return list;
+    }
+    private static boolean notEmpty(String s){
+        return s!=null&&s.length()!=0;
+    }
 }

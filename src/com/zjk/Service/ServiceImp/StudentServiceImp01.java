@@ -30,4 +30,9 @@ public class StudentServiceImp01 implements StudentService {
     public boolean update(Student student) {
         return new StudentDaoImpl().update(student);
     }
+
+    @Override
+    public List<Student> search(String num, String name) {
+        return new StudentDaoImpl().search(num,name);
+    }
 }

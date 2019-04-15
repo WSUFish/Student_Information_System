@@ -6,6 +6,7 @@ import com.zjk.Dao.impl.StudentDaoImpl;
 import com.zjk.Dao.impl.UserDaoImpl;
 import com.zjk.Service.ServiceImp.StudentService;
 import com.zjk.Service.ServiceImp.StudentServiceImp01;
+import com.zjk.entity.LoginInfo;
 import com.zjk.entity.Student;
 
 import javax.servlet.ServletException;
@@ -31,13 +32,18 @@ public class LoginServlet extends HttpServlet {
 
         String username=request.getParameter("username");
         String password=request.getParameter("password");
-        System.out.println("username="+username+" password="+password);
 
         UserDao Dao=new UserDaoImpl();
+        LoginInfo loginInfo=new LoginInfo();
         if(Dao.login(username,password)){
+            loginInfo.setSucceed(true);
+            request.getSession().setAttribute("login",loginInfo);
             request.getRequestDispatcher("list_servlet").forward(request,response);
         }else {
-            response.getWriter().write("用户名或密码错误!");
+            loginInfo.setSucceed(false);
+            request.getSession().setAttribute("login",loginInfo);
+            request.getSession().setAttribute("username",username);
+            request.getRequestDispatcher("login.jsp").forward(request,response);
         }
     }
 }

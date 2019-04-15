@@ -10,4 +10,5 @@ public interface StudentService {
     boolean delete(int id);
     Student findByID(int id);
     boolean update(Student student);
+    List<Student> search(String num,String name);
 }
