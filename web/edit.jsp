@@ -10,21 +10,22 @@
 <html>
 <head>
     <title>编辑学生信息</title>
+    <link rel="stylesheet" type="text/css" href="StudentTableCSS.css">
 </head>
 <body>
 <form method="post" action="updateServlet">
     <input type="hidden" name="id" value="${stu.id}">
-    <table border="1" width="700">
+    <table border="1" width="300">
         <tr>
-            <td>学号</td>
+            <th>学号</th>
             <td><input type="text" name="num" value="${stu.num}"></td>
         </tr>
         <tr>
-            <td>姓名</td>
+            <th>姓名</th>
             <td><input type="text" name="name" value="${stu.name}"></td>
         </tr>
         <tr>
-            <td>性别</td>
+            <th>性别</th>
             <td>
                 <input type="radio" name="sex" value="男"
                        <c:if test="${stu.sex == '男'}">checked</c:if>
@@ -35,19 +36,19 @@
             </td>
         </tr>
         <tr>
-            <td>电话</td>
+            <th>电话</th>
             <td><input type="text" name="phone" value="${stu.phone}"></td>
         </tr>
         <tr>
-            <td>邮箱</td>
+            <th>邮箱</th>
             <td><input type="text" name="email" value="${stu.email}"></td>
         </tr>
         <tr>
-            <td>地址</td>
+            <th>地址</th>
             <td><input type="text" name="address" value="${stu.address}"></td>
         </tr>
         <tr>
-            <td colspan="2"><input type="submit" value="修改"></td>
+            <td colspan="2"><input type="submit" value="保存"></td>
         </tr>
     </table>
 </form>

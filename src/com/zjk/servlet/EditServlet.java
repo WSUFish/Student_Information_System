@@ -21,6 +21,11 @@ public class EditServlet extends HttpServlet {
         int Sid=Integer.parseInt(request.getParameter("id"));
         StudentService service=new StudentServiceImp01();
         Student student=service.findByID(Sid);
+        if(student==null){
+            System.out.println("error!!! 已有id在数据库中消失");
+            response.sendRedirect("list_servlet");
+            return;
+        }
         request.setAttribute("stu",student);
         request.getRequestDispatcher("edit.jsp").forward(request,response);
     }

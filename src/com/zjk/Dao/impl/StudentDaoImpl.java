@@ -11,7 +11,7 @@ import java.util.List;
 public class StudentDaoImpl implements StudentDao {
     @Override
     public List<Student> findAll() {
-        List<Student> list=JDBCUtil.query("select * from student",new StudentRSH());
+        List<Student> list=JDBCUtil.query("select * from student order by Snum",new StudentRSH());
         return list;
     }
 
@@ -58,15 +58,16 @@ public class StudentDaoImpl implements StudentDao {
         String sql="select * from student";
         List<Student> list=null;
         if(notEmpty(num)&& notEmpty(name)){
-            sql+=" where Snum=? and Sname=?";
+            sql+=" where Snum=? and Sname=? order by Snum";
             list=JDBCUtil.query(sql,new StudentRSH(),num,name);
         }else if(notEmpty(num)){
-            sql+=" where Snum=?";
+            sql+=" where Snum=? order by Snum";
             list=JDBCUtil.query(sql,new StudentRSH(),num);
         }else if(notEmpty(name)){
-            sql+=" where Sname=?";
+            sql+=" where Sname=? order by Snum";
             list=JDBCUtil.query(sql,new StudentRSH(),name);
         }else{
+            sql+=" order by Snum";
             list=JDBCUtil.query(sql,new StudentRSH());
         }
         return list;

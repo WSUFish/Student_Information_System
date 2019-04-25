@@ -18,10 +18,11 @@ public class SingleStudentRSH implements ResultSetHandler<Student> {
                 student.setNum(rs.getString("Snum"));
                 student.setEmail(rs.getString("Semail"));
                 student.setPhone(rs.getString("Sphone"));
+                return student;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return student;
+        return null;
     }
 }

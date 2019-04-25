@@ -14,14 +14,19 @@
         function doDelete(id) {
             var flag = confirm("确定删除？");
             if (flag) {
-                window.event.returnValue = false;
                 location.href = "deleteServlet?id=" + id;
             }
         }
+        function doEdit(id) {
+            location.href = "editServlet?id=" + id;
+        }
     </script>
+    <link rel="stylesheet" type="text/css" href="StudentTableCSS.css">
 </head>
 <body>
-<br>学生列表<br>
+<br>
+<h2>学生列表</h2>
+<br>
 <form action="searchServlet" method="post">
     <table border="1" width="700">
         <tr>
@@ -32,18 +37,18 @@
                 按学号查询<input type="text" name="num">
                 &nbsp;
                 按姓名查询<input type="text" name="name">
-                &nbsp;&nbsp;
+                &nbsp;
                 <input type="submit" value="查询">
             </td>
         </tr>
         <tr>
-            <td>学号</td>
-            <td>姓名</td>
-            <td>性别</td>
-            <td>电话</td>
-            <td>邮箱</td>
-            <td>地址</td>
-            <td>操作</td>
+            <th>学号</th>
+            <th>姓名</th>
+            <th>性别</th>
+            <th>电话</th>
+            <th>邮箱</th>
+            <th>地址</th>
+            <th>操作</th>
         </tr>
         <c:forEach items="${list}" var="stu">
             <tr>
@@ -53,7 +58,7 @@
                 <td>${stu.phone}</td>
                 <td>${stu.email}</td>
                 <td>${stu.address}</td>
-                <td><a href="editServlet?id=${stu.id}">修改</a> <a href="" onclick="doDelete(${stu.id})">删除</a></td>
+                <td><input type="button" value="编辑" onclick="doEdit(${stu.id})">&nbsp;&nbsp;<input type="button" value="删除" onclick="doDelete(${stu.id})"></td>
             </tr>
         </c:forEach>
     </table>

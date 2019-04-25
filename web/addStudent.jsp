@@ -9,35 +9,36 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="StudentTableCSS.css">
 </head>
 <body>
 <form method="post" action="addStudent">
     <table border="1" width="700">
         <tr>
-            <td>学号</td>
+            <th>学号</th>
             <td><input type="text" name="num"></td>
         </tr>
         <tr>
-            <td>姓名</td>
+            <th>姓名</th>
             <td><input type="text" name="name"></td>
         </tr>
         <tr>
-            <td>性别</td>
+            <th>性别</th>
             <td>
                 <input type="radio" name="sex" value="男">男
                 <input type="radio" name="sex" value="女">女
             </td>
         </tr>
         <tr>
-            <td>电话</td>
+            <th>电话</th>
             <td><input type="text" name="phone"></td>
         </tr>
         <tr>
-            <td>邮箱</td>
+            <th>邮箱</th>
             <td><input type="text" name="email"></td>
         </tr>
         <tr>
-            <td>地址</td>
+            <th>地址</th>
             <td><input type="text" name="address"></td>
         </tr>
         <tr>

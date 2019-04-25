@@ -1,0 +1,19 @@
+body{background-color: whitesmoke}
+table, td, th
+{
+    border:1px solid #308080;
+}
+table
+{
+    text-align: center;
+    margin: auto;
+}
+h2
+{
+    text-align: center;
+}
+th
+{
+    background-color: #0e6380;
+    color:white;
+}
