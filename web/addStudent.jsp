@@ -13,7 +13,7 @@
 </head>
 <body>
 <form method="post" action="addStudent">
-    <table border="1" width="700">
+    <table border="1" width="300">
         <tr>
             <th>学号</th>
             <td><input type="text" name="num"></td>
